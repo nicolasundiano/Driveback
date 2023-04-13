@@ -1,6 +1,6 @@
 using Domain.Common;
 
-namespace Domain.Users.ValueObjects;
+namespace Domain.Vehicles.Cars.ValueObjects;
 
 public class CarId : ValueObject, IId
 {

@@ -1,8 +1,9 @@
+using Domain.Common;
 using Domain.Common.Validators;
-using Domain.Users.Entities.Base;
-using Domain.Users.ValueObjects;
+using Domain.Vehicles.Cars.ValueObjects;
+using Domain.Vehicles.Common;
 
-namespace Domain.Users.Entities;
+namespace Domain.Vehicles.Cars;
 
 public class Car : Vehicle
 {
@@ -16,8 +17,9 @@ public class Car : Vehicle
         return new Car(CarId.CreateUnique(), licensePlate);
     }
 
-    private void Validate()
+    private new void Validate()
     {
+        base.Validate();
         ValidationHelper.ValidateString(LicensePlate, nameof(LicensePlate), 10);
     }
     
