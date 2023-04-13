@@ -1,24 +1,24 @@
 using Domain.Common;
 
-namespace Domain.Users.ValueObjects;
+namespace Domain.Vehicles.ValueObjects;
 
-public class UserId : ValueObject
+public class VehicleId : ValueObject
 {
     public Guid Value { get; }
 
-    private UserId(Guid value)
+    private VehicleId(Guid value)
     {
         Value = value;
     }
 
-    public static UserId Create(Guid value)
+    public static VehicleId Create(Guid value)
     {
-        return new UserId(value);
+        return new VehicleId(value);
     }
 
-    public static UserId CreateUnique()
+    public static VehicleId CreateUnique()
     {
-        return new UserId(Guid.NewGuid());
+        return new VehicleId(Guid.NewGuid());
     }
 
     public override IEnumerable<object> GetEqualityComponents()
