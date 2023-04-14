@@ -1,10 +1,10 @@
 using Domain.Users.ValueObjects;
-using Infrastructure.Identity.Models;
+using Infrastructure.Authentication.Identity.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Infrastructure.Identity.Configurations;
+namespace Infrastructure.Authentication.Identity.Configurations;
 
 internal class ApplicationUserConfig : IEntityTypeConfiguration<ApplicationUser>
 {

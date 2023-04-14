@@ -4,11 +4,11 @@ using System.Text;
 using Application.Common.Interfaces.Services;
 using Application.Users.Common.Interfaces;
 using Domain.Users;
-using Infrastructure.Jwt.Models;
+using Infrastructure.Authentication.Jwt.Models;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Infrastructure.Jwt.Services;
+namespace Infrastructure.Authentication.Jwt.Services;
 
 internal class JwtTokenGenerator : IJwtTokenGenerator
 {

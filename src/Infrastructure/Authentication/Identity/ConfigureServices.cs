@@ -1,13 +1,13 @@
 using Application.Users.Common.Interfaces;
-using Infrastructure.Identity.Models;
-using Infrastructure.Identity.Services;
+using Infrastructure.Authentication.Identity.Models;
+using Infrastructure.Authentication.Identity.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Infrastructure.Identity;
+namespace Infrastructure.Authentication.Identity;
 
 internal static class ConfigureServices
 {

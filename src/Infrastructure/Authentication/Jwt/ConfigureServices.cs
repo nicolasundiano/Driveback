@@ -1,14 +1,14 @@
 using System.Text;
 using Application.Users.Common.Interfaces;
-using Infrastructure.Jwt.Models;
-using Infrastructure.Jwt.Services;
+using Infrastructure.Authentication.Jwt.Models;
+using Infrastructure.Authentication.Jwt.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Infrastructure.Jwt;
+namespace Infrastructure.Authentication.Jwt;
 
 internal static class ConfigureServices
 {

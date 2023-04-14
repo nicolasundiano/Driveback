@@ -1,9 +1,9 @@
 using Application.Users.Common.Interfaces;
 using Domain.Users.ValueObjects;
-using Infrastructure.Identity.Models;
+using Infrastructure.Authentication.Identity.Models;
 using Microsoft.AspNetCore.Identity;
 
-namespace Infrastructure.Identity.Services;
+namespace Infrastructure.Authentication.Identity.Services;
 
 public class IdentityService : IIdentityService
 {

@@ -1,5 +1,5 @@
-using Infrastructure.Identity;
-using Infrastructure.Jwt;
+using Infrastructure.Authentication.Identity;
+using Infrastructure.Authentication.Jwt;
 using Infrastructure.Persistence;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

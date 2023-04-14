@@ -1,9 +1,9 @@
-using Infrastructure.Identity.Configurations;
-using Infrastructure.Identity.Models;
+using Infrastructure.Authentication.Identity.Configurations;
+using Infrastructure.Authentication.Identity.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure.Identity.Context;
+namespace Infrastructure.Authentication.Identity.Context;
 
 public class IdentityDbContext : IdentityDbContext<ApplicationUser>
 {

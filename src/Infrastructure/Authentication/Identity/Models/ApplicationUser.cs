@@ -1,7 +1,7 @@
 using Domain.Users.ValueObjects;
 using Microsoft.AspNetCore.Identity;
 
-namespace Infrastructure.Identity.Models;
+namespace Infrastructure.Authentication.Identity.Models;
 
 public sealed class ApplicationUser : IdentityUser
 {
