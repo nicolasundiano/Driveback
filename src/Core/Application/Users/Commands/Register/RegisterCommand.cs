@@ -58,6 +58,7 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, ErrorOr<U
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 
         var registerSucceed = await _authenticationRepository.RegisterAsync(
+            user.Id,
             command.Email,
             command.Password,
             UserRoles.Customer);
