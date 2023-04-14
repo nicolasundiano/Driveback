@@ -2,7 +2,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Application.Common.Interfaces.Services;
-using Application.Users.Common.Interfaces;
+using Application.Users.Authentication.Common.Interfaces;
 using Domain.Users;
 using Infrastructure.Authentication.Jwt.Models;
 using Microsoft.Extensions.Options;

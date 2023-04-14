@@ -1,5 +1,4 @@
-using Infrastructure.Authentication.Identity;
-using Infrastructure.Authentication.Jwt;
+using Infrastructure.Authentication;
 using Infrastructure.Persistence;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,11 +11,8 @@ public static class ConfigureServices
         this IServiceCollection services,
         ConfigurationManager configuration)
     {
-        services
+        return services
             .ConfigurePersistence(configuration)
-            .ConfigureIdentity(configuration)
-            .ConfigureJwt(configuration);
-        
-        return services;
+            .ConfigureAuthentication(configuration);
     }
 }

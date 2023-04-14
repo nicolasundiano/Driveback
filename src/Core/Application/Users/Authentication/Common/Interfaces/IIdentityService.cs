@@ -1,6 +1,6 @@
 using Domain.Users.ValueObjects;
 
-namespace Application.Users.Common.Interfaces;
+namespace Application.Users.Authentication.Common.Interfaces;
 
 public interface IIdentityService
 {

@@ -1,4 +1,4 @@
-using Application.Users.Common.Interfaces;
+using Application.Users.Authentication.Common.Interfaces;
 using Infrastructure.Authentication.Identity.Models;
 using Infrastructure.Authentication.Identity.Services;
 using Microsoft.AspNetCore.Identity;

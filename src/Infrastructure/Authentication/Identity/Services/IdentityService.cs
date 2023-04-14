@@ -1,4 +1,4 @@
-using Application.Users.Common.Interfaces;
+using Application.Users.Authentication.Common.Interfaces;
 using Domain.Users.ValueObjects;
 using Infrastructure.Authentication.Identity.Models;
 using Microsoft.AspNetCore.Identity;

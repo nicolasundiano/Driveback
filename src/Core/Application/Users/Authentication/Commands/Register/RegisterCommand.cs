@@ -1,6 +1,6 @@
 using Application.Common.Interfaces.Persistence;
+using Application.Users.Authentication.Common.Interfaces;
 using Application.Users.Common.Errors;
-using Application.Users.Common.Interfaces;
 using Application.Users.Common.Models;
 using Application.Users.Common.Specifications;
 using AutoMapper;
@@ -9,7 +9,7 @@ using Domain.Users;
 using ErrorOr;
 using MediatR;
 
-namespace Application.Users.Commands.Register;
+namespace Application.Users.Authentication.Commands.Register;
 
 public record RegisterCommand(
     string Email,
