@@ -21,18 +21,18 @@ public record RegisterCommand(
 public class RegisterCommandHandler : IRequestHandler<RegisterCommand, ErrorOr<UserResponse>>
 {
     private readonly IRepository<User> _userRepository;
-    private readonly IIdentityRepository _identityRepository;
+    private readonly IIdentityService _identityService;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
 
     public RegisterCommandHandler(
         IRepository<User> userRepository,
-        IIdentityRepository identityRepository,
+        IIdentityService identityService,
         IUnitOfWork unitOfWork,
         IMapper mapper)
     {
         _userRepository = userRepository;
-        _identityRepository = identityRepository;
+        _identityService = identityService;
         _unitOfWork = unitOfWork;
         _mapper = mapper;
     }
@@ -57,7 +57,7 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, ErrorOr<U
         _userRepository.Add(user);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-        var registerSucceed = await _identityRepository.RegisterAsync(
+        var registerSucceed = await _identityService.RegisterAsync(
             user.Id,
             command.Email,
             command.Password,

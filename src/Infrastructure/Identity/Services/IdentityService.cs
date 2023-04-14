@@ -3,14 +3,14 @@ using Domain.Users.ValueObjects;
 using Infrastructure.Identity.Models;
 using Microsoft.AspNetCore.Identity;
 
-namespace Infrastructure.Identity.Repositories;
+namespace Infrastructure.Identity.Services;
 
-public class IdentityRepository : IIdentityRepository
+public class IdentityService : IIdentityService
 {
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly SignInManager<ApplicationUser> _signInManager;
 
-    public IdentityRepository(
+    public IdentityService(
         UserManager<ApplicationUser> userManager,
         SignInManager<ApplicationUser> signInManager)
     {

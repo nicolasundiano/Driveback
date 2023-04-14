@@ -16,16 +16,16 @@ public record LoginCommand(
 public class LoginCommandHandler : IRequestHandler<LoginCommand, ErrorOr<AuthenticationResponse>>
 {
     private readonly IRepository<User> _userRepository;
-    private readonly IIdentityRepository _identityRepository;
+    private readonly IIdentityService _identityService;
     private readonly IJwtTokenGenerator _tokenGenerator;
 
     public LoginCommandHandler(
         IRepository<User> userRepository,
-        IIdentityRepository identityRepository,
+        IIdentityService identityService,
         IJwtTokenGenerator tokenGenerator)
     {
         _userRepository = userRepository;
-        _identityRepository = identityRepository;
+        _identityService = identityService;
         _tokenGenerator = tokenGenerator;
     }
     public async Task<ErrorOr<AuthenticationResponse>> Handle(
@@ -36,9 +36,9 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, ErrorOr<Authent
             new UserSpecification(command.Email),
             cancellationToken);
 
-        var userLogIn = await _identityRepository.LoginAsync(command.Email, command.Password);
+        var loginSucceed = await _identityService.LoginAsync(command.Email, command.Password);
         
-        if (user is null || !userLogIn)
+        if (user is null || !loginSucceed)
         {
             return UserErrors.InvalidCredentials;
         }

@@ -1,6 +1,6 @@
 using Application.Users.Common.Interfaces;
 using Infrastructure.Identity.Models;
-using Infrastructure.Identity.Repositories;
+using Infrastructure.Identity.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -18,7 +18,7 @@ internal static class ConfigureServices
         services.AddDbContext<IdentityDbContext>(c =>
             c.UseSqlServer(configuration.GetConnectionString("IdentityConnection")));
         
-        services.AddScoped<IIdentityRepository, IdentityRepository>();
+        services.AddScoped<IIdentityService, IdentityService>();
         
         services.AddIdentity<ApplicationUser, IdentityRole>()
             .AddEntityFrameworkStores<IdentityDbContext>()
