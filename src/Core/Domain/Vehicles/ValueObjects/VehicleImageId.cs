@@ -2,23 +2,23 @@ using Domain.Common;
 
 namespace Domain.Vehicles.ValueObjects;
 
-public class ImageId : ValueObject
+public class VehicleImageId : ValueObject
 {
     public Guid Value { get; }
 
-    private ImageId(Guid value)
+    private VehicleImageId(Guid value)
     {
         Value = value;
     }
 
-    public static ImageId Create(Guid value)
+    public static VehicleImageId Create(Guid value)
     {
-        return new ImageId(value);
+        return new VehicleImageId(value);
     }
 
-    public static ImageId CreateUnique()
+    public static VehicleImageId CreateUnique()
     {
-        return new ImageId(Guid.NewGuid());
+        return new VehicleImageId(Guid.NewGuid());
     }
 
     public override IEnumerable<object> GetEqualityComponents()

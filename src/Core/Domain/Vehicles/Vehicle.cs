@@ -8,12 +8,12 @@ namespace Domain.Vehicles;
 
 public class Vehicle : Entity<VehicleId>, IAggregateRoot
 {
-    private readonly List<Image> _images = new();
+    private readonly List<VehicleImage> _images = new();
     public UserId UserId { get; private set; }
     public string LicensePlate { get; private set; }
-    public IReadOnlyList<Image> Images => _images.AsReadOnly();
+    public IReadOnlyList<VehicleImage> Images => _images.AsReadOnly();
 
-    private Vehicle(VehicleId id, UserId userId, string licensePlate, List<Image> images) : base(id)
+    private Vehicle(VehicleId id, UserId userId, string licensePlate, List<VehicleImage> images) : base(id)
     {
         UserId = userId;
         LicensePlate = licensePlate;

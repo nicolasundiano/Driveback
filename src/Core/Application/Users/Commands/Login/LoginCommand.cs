@@ -16,16 +16,16 @@ public record LoginCommand(
 public class LoginCommandHandler : IRequestHandler<LoginCommand, ErrorOr<AuthenticationResponse>>
 {
     private readonly IRepository<User> _userRepository;
-    private readonly IAuthenticationService _authenticationRepository;
+    private readonly IIdentityRepository _identityRepository;
     private readonly IJwtTokenGenerator _tokenGenerator;
 
     public LoginCommandHandler(
         IRepository<User> userRepository,
-        IAuthenticationService authenticationRepository,
+        IIdentityRepository identityRepository,
         IJwtTokenGenerator tokenGenerator)
     {
         _userRepository = userRepository;
-        _authenticationRepository = authenticationRepository;
+        _identityRepository = identityRepository;
         _tokenGenerator = tokenGenerator;
     }
     public async Task<ErrorOr<AuthenticationResponse>> Handle(
@@ -36,7 +36,7 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, ErrorOr<Authent
             new UserSpecification(command.Email),
             cancellationToken);
 
-        var userLogIn = await _authenticationRepository.LoginAsync(command.Email, command.Password);
+        var userLogIn = await _identityRepository.LoginAsync(command.Email, command.Password);
         
         if (user is null || !userLogIn)
         {
