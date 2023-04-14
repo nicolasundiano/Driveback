@@ -1,10 +1,10 @@
 using Application.Common.Interfaces.Persistence;
+using Application.Users.Authentication.Common.Constants;
 using Application.Users.Authentication.Common.Interfaces;
 using Application.Users.Common.Errors;
 using Application.Users.Common.Models;
 using Application.Users.Common.Specifications;
 using AutoMapper;
-using Domain.Common;
 using Domain.Users;
 using ErrorOr;
 using MediatR;

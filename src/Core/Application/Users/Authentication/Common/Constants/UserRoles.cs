@@ -1,4 +1,4 @@
-namespace Domain.Common;
+namespace Application.Users.Authentication.Common.Constants;
 
 public static class UserRoles
 {
