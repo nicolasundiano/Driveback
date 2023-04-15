@@ -2,6 +2,7 @@ using Application.Users.Authentication.Common.Interfaces;
 using Domain.Users.ValueObjects;
 using Infrastructure.Authentication.Identity.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Authentication.Identity.Services;
 
@@ -9,13 +10,16 @@ public class IdentityService : IIdentityService
 {
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly SignInManager<ApplicationUser> _signInManager;
+    private readonly RoleManager<IdentityRole> _roleManager;
 
     public IdentityService(
         UserManager<ApplicationUser> userManager,
-        SignInManager<ApplicationUser> signInManager)
+        SignInManager<ApplicationUser> signInManager,
+        RoleManager<IdentityRole> roleManager)
     {
         _userManager = userManager;
         _signInManager = signInManager;
+        _roleManager = roleManager;
     }
     
     public async Task<bool> RegisterAsync(UserId domainUserId, string email, string password, string role)
@@ -44,5 +48,22 @@ public class IdentityService : IIdentityService
         var loginResult = await _signInManager.PasswordSignInAsync(email, password, false, true);
 
         return loginResult.Succeeded;
+    }
+    
+    public async Task<bool> UsersAnyAsync()
+    {
+        return await _userManager.Users.AnyAsync();
+    }
+
+    public async Task<bool> RolesAnyAsync()
+    {
+        return await _roleManager.Roles.AnyAsync();
+    }
+
+    public async Task<bool> CreateRoleAsync(string role)
+    {
+        var createRoleResult = await _roleManager.CreateAsync(new IdentityRole(role));
+
+        return createRoleResult.Succeeded;
     }
 }

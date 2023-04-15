@@ -61,7 +61,7 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, ErrorOr<U
             user.Id,
             command.Email,
             command.Password,
-            UserRoles.Customer);
+            UserRoles.Basic);
 
         if (!registerSucceed)
         {
