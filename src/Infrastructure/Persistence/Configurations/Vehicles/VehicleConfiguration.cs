@@ -1,3 +1,5 @@
+using Domain.Users;
+using Domain.Users.ValueObjects;
 using Domain.Vehicles;
 using Domain.Vehicles.ValueObjects;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +20,11 @@ internal class VehicleConfiguration : IEntityTypeConfiguration<Vehicle>
             .HasConversion(
                 id => id.Value,
                 value => VehicleId.Create(value));
+        
+        builder.HasOne<User>()
+            .WithMany()
+            .HasForeignKey(nameof(UserId))
+            .OnDelete(DeleteBehavior.Restrict);
         
         builder.Property(c => c.LicensePlate)
             .HasMaxLength(10);

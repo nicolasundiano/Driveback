@@ -1,8 +1,8 @@
 using Application.Users.Authentication.Common.Interfaces;
+using Infrastructure.Authentication.Identity.Context;
 using Infrastructure.Authentication.Identity.Models;
 using Infrastructure.Authentication.Identity.Services;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,13 +15,13 @@ internal static class ConfigureServices
         this IServiceCollection services,
         ConfigurationManager configuration)
     {
-        services.AddDbContext<IdentityDbContext>(c =>
+        services.AddDbContext<IdentityAuthDbContext>(c =>
             c.UseSqlServer(configuration.GetConnectionString("IdentityConnection")));
         
         services.AddScoped<IIdentityService, IdentityService>();
         
         services.AddIdentity<ApplicationUser, IdentityRole>()
-            .AddEntityFrameworkStores<IdentityDbContext>()
+            .AddEntityFrameworkStores<IdentityAuthDbContext>()
             .AddSignInManager<SignInManager<ApplicationUser>>()
             .AddDefaultTokenProviders();
         

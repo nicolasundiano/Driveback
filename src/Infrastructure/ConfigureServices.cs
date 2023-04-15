@@ -1,4 +1,5 @@
 using Infrastructure.Authentication;
+using Infrastructure.Common;
 using Infrastructure.Persistence;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,6 +13,7 @@ public static class ConfigureServices
         ConfigurationManager configuration)
     {
         return services
+            .ConfigureCommonInfrastructure(configuration)
             .ConfigurePersistence(configuration)
             .ConfigureAuthentication(configuration);
     }

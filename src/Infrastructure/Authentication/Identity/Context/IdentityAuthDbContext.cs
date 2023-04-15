@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Authentication.Identity.Context;
 
-public class IdentityDbContext : IdentityDbContext<ApplicationUser>
+public class IdentityAuthDbContext : IdentityDbContext<ApplicationUser>
 {
-    public IdentityDbContext(DbContextOptions<IdentityDbContext> options) : base(options)
+    public IdentityAuthDbContext(DbContextOptions<IdentityAuthDbContext> options) : base(options)
     {
         
     }

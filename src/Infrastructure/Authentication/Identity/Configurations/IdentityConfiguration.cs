@@ -10,7 +10,7 @@ internal class ApplicationUserConfig : IEntityTypeConfiguration<ApplicationUser>
 {
     public void Configure(EntityTypeBuilder<ApplicationUser> builder)
     {
-        builder.ToTable("IdentityUsers")
+        builder.ToTable("Users")
             .Property(m => m.DomainUserId)
             .HasConversion(
                 id => id.Value,
@@ -21,35 +21,35 @@ internal class ApplicationUserConfig : IEntityTypeConfiguration<ApplicationUser>
 internal class IdentityRoleConfig : IEntityTypeConfiguration<IdentityRole>
 {
     public void Configure(EntityTypeBuilder<IdentityRole> builder) =>
-        builder.ToTable("IdentityRoles");
+        builder.ToTable("Roles");
 }
 
 internal class IdentityRoleClaimConfig : IEntityTypeConfiguration<IdentityRoleClaim<string>>
 {
     public void Configure(EntityTypeBuilder<IdentityRoleClaim<string>> builder) =>
-        builder.ToTable("IdentityRoleClaims");
+        builder.ToTable("RoleClaims");
 }
 
 internal class IdentityUserRoleConfig : IEntityTypeConfiguration<IdentityUserRole<string>>
 {
     public void Configure(EntityTypeBuilder<IdentityUserRole<string>> builder) =>
-        builder.ToTable("IdentityUserRoles");
+        builder.ToTable("UserRoles");
 }
 
 internal class IdentityUserClaimConfig : IEntityTypeConfiguration<IdentityUserClaim<string>>
 {
     public void Configure(EntityTypeBuilder<IdentityUserClaim<string>> builder) =>
-        builder.ToTable("IdentityUserClaims");
+        builder.ToTable("UserClaims");
 }
 
 public class IdentityUserLoginConfig : IEntityTypeConfiguration<IdentityUserLogin<string>>
 {
     public void Configure(EntityTypeBuilder<IdentityUserLogin<string>> builder) =>
-        builder.ToTable("IdentityUserLogins");
+        builder.ToTable("UserLogins");
 }
 
 internal class IdentityUserTokenConfig : IEntityTypeConfiguration<IdentityUserToken<string>>
 {
     public void Configure(EntityTypeBuilder<IdentityUserToken<string>> builder) =>
-        builder.ToTable("IdentityUserTokens");
+        builder.ToTable("UserTokens");
 }
