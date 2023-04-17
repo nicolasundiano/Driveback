@@ -1,6 +1,8 @@
 using Application.Users.Authentication.Commands.Login;
 using Application.Users.Authentication.Commands.Register;
+using Application.Users.Queries.GetAll;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Controllers.Common;
 
@@ -16,6 +18,7 @@ public class UsersController : ApiController
         _mediator = mediator;
     }
 
+    [AllowAnonymous]
     [HttpPost]
     public async Task<IActionResult> Register(RegisterCommand command)
     {
@@ -24,11 +27,18 @@ public class UsersController : ApiController
         return registerResult.Match(Ok, Problem);
     }
     
+    [AllowAnonymous]
     [HttpPost]
     public async Task<IActionResult> Login(LoginCommand command)
     {
         var loginResult = await _mediator.Send(command);
 
         return loginResult.Match(Ok, Problem);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetAll([FromQuery] GetAllUsersQuery query)
+    {
+        return Ok(await _mediator.Send(query));
     }
 }
