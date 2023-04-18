@@ -7,7 +7,7 @@ using WebApi.Common.Http;
 namespace WebApi.Controllers.Common;
 
 [ApiController]
-[Authorize(AuthenticationSchemes = "Bearer")]
+[Authorize]
 public class ApiController : ControllerBase
 {
     protected IActionResult Problem(List<Error> errors)
