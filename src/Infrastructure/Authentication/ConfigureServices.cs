@@ -1,5 +1,7 @@
+using Application.Users.Authentication.Common.Interfaces;
 using Infrastructure.Authentication.Identity;
 using Infrastructure.Authentication.Jwt;
+using Infrastructure.Authentication.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,6 +13,10 @@ internal static class ConfigureServices
         this IServiceCollection services,
         ConfigurationManager configuration)
     {
+        services.AddHttpContextAccessor();
+        
+        services.AddScoped<ICurrentUserService, CurrentUserService>();
+        
         return services
             .ConfigureIdentity(configuration)
             .ConfigureJwt(configuration);
