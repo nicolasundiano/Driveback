@@ -22,7 +22,6 @@ internal static class ConfigureServices
         
         services.AddIdentity<ApplicationUser, IdentityRole>()
             .AddEntityFrameworkStores<IdentityAuthDbContext>()
-            .AddSignInManager<SignInManager<ApplicationUser>>()
             .AddDefaultTokenProviders();
         
         return services;
