@@ -1,5 +1,4 @@
 using Application.Users.Authentication.Common.Interfaces;
-using Domain.Users.ValueObjects;
 using Infrastructure.Authentication.Identity.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -22,7 +21,7 @@ public class IdentityService : IIdentityService
         _roleManager = roleManager;
     }
     
-    public async Task<bool> RegisterAsync(UserId domainUserId, string email, string password, string role)
+    public async Task<bool> RegisterAsync(Guid domainUserId, string email, string password, string role)
     {
         var identityUser = new ApplicationUser(domainUserId, email);
 

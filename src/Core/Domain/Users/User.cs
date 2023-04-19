@@ -1,17 +1,16 @@
 using Domain.Common;
 using Domain.Common.Validators;
-using Domain.Users.ValueObjects;
 
 namespace Domain.Users;
 
-public class User : Entity<UserId>, IAggregateRoot
+public class User : Entity<Guid>, IAggregateRoot
 {
     public string Email { get; private set; }
     public string FirstName { get; private set; }
     public string LastName { get; private set; }
     public string Phone { get; private set; }
 
-    private User(UserId id, string email, string firstName, string lastName, string phone)
+    private User(Guid id, string email, string firstName, string lastName, string phone)
         : base(id)
     {
         Email = email;
@@ -24,7 +23,7 @@ public class User : Entity<UserId>, IAggregateRoot
 
     public static User Create(string email, string firstName, string lastName, string phone)
     {
-        return new User(UserId.CreateUnique(), email, firstName, lastName, phone);
+        return new User(Guid.NewGuid(), email, firstName, lastName, phone);
     }
     
     public void UpdateDetails(string? firstName, string? lastName, string? phone)

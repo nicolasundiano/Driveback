@@ -1,5 +1,4 @@
 using Domain.Users;
-using Domain.Users.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -12,12 +11,6 @@ internal class UserConfiguration : IEntityTypeConfiguration<User>
         builder.ToTable("Users");
         
         builder.HasKey(u => u.Id);
-
-        builder.Property(u => u.Id)
-            .ValueGeneratedNever()
-            .HasConversion(
-                id => id.Value,
-                value => UserId.Create(value));
 
         builder.HasIndex(u => u.Email).IsUnique();
         

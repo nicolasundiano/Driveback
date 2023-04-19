@@ -1,13 +1,12 @@
-using Domain.Users.ValueObjects;
 using Microsoft.AspNetCore.Identity;
 
 namespace Infrastructure.Authentication.Identity.Models;
 
 public sealed class ApplicationUser : IdentityUser
 {
-    public UserId DomainUserId { get; }
+    public Guid DomainUserId { get; init; }
     
-    public ApplicationUser(UserId domainUserId, string email)
+    public ApplicationUser(Guid domainUserId, string email)
     {
         DomainUserId = domainUserId;
         Email = email;

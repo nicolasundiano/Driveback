@@ -1,4 +1,3 @@
-using Domain.Users.ValueObjects;
 using Infrastructure.Authentication.Identity.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -10,11 +9,7 @@ internal class ApplicationUserConfig : IEntityTypeConfiguration<ApplicationUser>
 {
     public void Configure(EntityTypeBuilder<ApplicationUser> builder)
     {
-        builder.ToTable("Users")
-            .Property(m => m.DomainUserId)
-            .HasConversion(
-                id => id.Value,
-                value => UserId.Create(value));
+        builder.ToTable("Users");
     }
 }
 
