@@ -1,4 +1,4 @@
-namespace Infrastructure.Common.Models;
+namespace Infrastructure.Authentication.Common.Models;
 
 public class AdminUserSettings
 {

@@ -1,9 +1,9 @@
 using Application.Common.Interfaces.Persistence;
-using Application.Users.Authentication.Common.Constants;
 using Application.Users.Authentication.Common.Interfaces;
 using Application.Users.Common.Specifications;
 using Domain.Users;
-using Infrastructure.Common.Models;
+using Infrastructure.Authentication.Common.Constants;
+using Infrastructure.Authentication.Common.Models;
 
 namespace Infrastructure.Authentication.Identity.Initialization;
 
@@ -30,8 +30,7 @@ public static class IdentityDbInitializer
                 await authenticationService.RegisterAsync(
                     user.Id,
                     adminUserSettings.Email,
-                    adminUserSettings.Password,
-                    UserRoles.Admin);
+                    adminUserSettings.Password);
             }
         }
     }

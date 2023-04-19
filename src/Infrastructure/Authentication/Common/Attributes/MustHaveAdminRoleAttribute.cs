@@ -1,7 +1,7 @@
-using Application.Users.Authentication.Common.Constants;
+using Infrastructure.Authentication.Common.Constants;
 using Microsoft.AspNetCore.Authorization;
 
-namespace Infrastructure.Authentication.Attributes;
+namespace Infrastructure.Authentication.Common.Attributes;
 
 public class MustHaveAdminRoleAttribute : AuthorizeAttribute
 {

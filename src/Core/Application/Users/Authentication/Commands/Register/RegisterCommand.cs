@@ -1,5 +1,4 @@
 using Application.Common.Interfaces.Persistence;
-using Application.Users.Authentication.Common.Constants;
 using Application.Users.Authentication.Common.Interfaces;
 using Application.Users.Common.Errors;
 using Application.Users.Common.Models;
@@ -60,8 +59,7 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, ErrorOr<U
         var registerSucceed = await _identityService.RegisterAsync(
             user.Id,
             command.Email,
-            command.Password,
-            UserRoles.Basic);
+            command.Password);
 
         if (!registerSucceed)
         {

@@ -1,5 +1,5 @@
 using Application.Users.Queries.GetAll;
-using Infrastructure.Authentication.Attributes;
+using Infrastructure.Authentication.Common.Attributes;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Controllers.Common;

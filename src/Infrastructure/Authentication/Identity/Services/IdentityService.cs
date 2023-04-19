@@ -1,4 +1,5 @@
 using Application.Users.Authentication.Common.Interfaces;
+using Infrastructure.Authentication.Common.Constants;
 using Infrastructure.Authentication.Identity.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -21,7 +22,7 @@ public class IdentityService : IIdentityService
         _roleManager = roleManager;
     }
     
-    public async Task<bool> RegisterAsync(Guid domainUserId, string email, string password, string role)
+    public async Task<bool> RegisterAsync(Guid domainUserId, string email, string password)
     {
         var identityUser = new ApplicationUser(domainUserId, email);
 
@@ -29,7 +30,7 @@ public class IdentityService : IIdentityService
         
         if (registerResult.Succeeded)
         {
-            var addToRoleResult = await _userManager.AddToRoleAsync(identityUser, role);
+            var addToRoleResult = await _userManager.AddToRoleAsync(identityUser, UserRoles.Basic);
 
             if (addToRoleResult.Succeeded)
             {
