@@ -66,4 +66,16 @@ public class IdentityService : IIdentityService
 
         return createRoleResult.Succeeded;
     }
+
+    public async Task<IList<string>> GetRolesByUserAsync(string email)
+    {
+        var user = await _userManager.FindByEmailAsync(email);
+
+        if (user is null)
+        {
+            throw new Exception("user not found");
+        }
+        
+        return await _userManager.GetRolesAsync(user);
+    }
 }

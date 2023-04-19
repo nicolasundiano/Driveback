@@ -43,7 +43,9 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, ErrorOr<Authent
             return UserErrors.InvalidCredentials;
         }
 
-        var token = _tokenGenerator.GenerateToken(user);
+        var roles = await _identityService.GetRolesByUserAsync(user.Email);
+
+        var token = _tokenGenerator.GenerateToken(user, roles);
 
         return new AuthenticationResponse(token);
     }

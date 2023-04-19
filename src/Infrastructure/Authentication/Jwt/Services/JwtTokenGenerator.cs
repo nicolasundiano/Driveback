@@ -21,21 +21,23 @@ internal class JwtTokenGenerator : IJwtTokenGenerator
         _jwtSettings = jwtOptions.Value;
     }
 
-    public string GenerateToken(User user)
+    public string GenerateToken(User user, IEnumerable<string> roles)
     {
         var signingCredentials = new SigningCredentials(
             new SymmetricSecurityKey(
                 Encoding.UTF8.GetBytes(_jwtSettings.Secret)),
             SecurityAlgorithms.HmacSha256);
 
-        var claims = new[]
+        var claims = new List<Claim>
         {
-            new Claim(ClaimTypes.NameIdentifier, user.Id.Value.ToString()),
-            new Claim(ClaimTypes.Email, user.Email),
-            new Claim(ClaimTypes.Name, user.FirstName),
-            new Claim(ClaimTypes.Surname, user.LastName),
-            new Claim(ClaimTypes.MobilePhone, user.Phone),
+            new(ClaimTypes.NameIdentifier, user.Id.Value.ToString()),
+            new(ClaimTypes.Email, user.Email),
+            new(ClaimTypes.Name, user.FirstName),
+            new(ClaimTypes.Surname, user.LastName),
+            new(ClaimTypes.MobilePhone, user.Phone),
         };
+        
+        claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
 
         var securityToken = new JwtSecurityToken(
             issuer: _jwtSettings.Issuer,

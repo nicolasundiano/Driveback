@@ -9,4 +9,5 @@ public interface IIdentityService
     Task<bool> UsersAnyAsync();
     Task<bool> RolesAnyAsync();
     Task<bool> CreateRoleAsync(string role);
+    Task<IList<string>> GetRolesByUserAsync(string email);
 }
