@@ -1,6 +1,6 @@
 using Application.Users.Authentication.Commands.Login;
 using Application.Users.Authentication.Commands.Register;
-using Application.Users.Authentication.Queries.GetCurrentUserEmail;
+using Application.Users.Authentication.Queries.GetCurrentUser;
 using Application.Users.Queries.GetAll;
 using Infrastructure.Authentication.Attributes;
 using MediatR;
@@ -48,6 +48,6 @@ public class UsersController : ApiController
     [HttpGet]
     public async Task<IActionResult> GetCurrentUser()
     {
-        return Ok(await _mediator.Send(new GetCurrentUserEmailQuery()));
+        return Ok(await _mediator.Send(new GetCurrentUserQuery()));
     }
 }
