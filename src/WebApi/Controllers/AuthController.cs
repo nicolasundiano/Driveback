@@ -39,6 +39,8 @@ public class AuthController : ApiController
     [HttpGet]
     public async Task<IActionResult> GetCurrentUser()
     {
-        return Ok(await _mediator.Send(new GetCurrentUserQuery()));
+        var errorOrUser = await _mediator.Send(new GetCurrentUserQuery());
+
+        return errorOrUser.Match(Ok, Problem);
     }
 }
