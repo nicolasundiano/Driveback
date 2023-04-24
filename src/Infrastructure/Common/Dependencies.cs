@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Infrastructure.Common;
 
-internal static class ConfigureServices
+internal static class Dependencies
 {
     internal static IServiceCollection ConfigureCommonInfrastructure(
         this IServiceCollection services,

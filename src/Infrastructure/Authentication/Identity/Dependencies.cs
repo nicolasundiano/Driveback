@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Infrastructure.Authentication.Identity;
 
-internal static class ConfigureServices
+internal static class Dependencies
 {
     internal static IServiceCollection ConfigureIdentity(
         this IServiceCollection services,

@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Infrastructure.Persistence;
 
-internal static class ConfigureServices
+internal static class Dependencies
 {
     internal static IServiceCollection ConfigurePersistence(
         this IServiceCollection services,

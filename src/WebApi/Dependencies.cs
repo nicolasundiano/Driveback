@@ -4,7 +4,7 @@ using WebApi.Common.Errors;
 
 namespace WebApi;
 
-public static class ConfigureServices
+public static class Dependencies
 {
     public static IServiceCollection ConfigureWebApi(this IServiceCollection services)
     {

@@ -6,11 +6,11 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Application;
 
-public static class ConfigureServices
+public static class Dependencies
 {
     public static IServiceCollection ConfigureApplication(this IServiceCollection services)
     {
-        services.AddMediatR(x => x.RegisterServicesFromAssembly(typeof(ConfigureServices).Assembly));
+        services.AddMediatR(x => x.RegisterServicesFromAssembly(typeof(Dependencies).Assembly));
         
         services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
         

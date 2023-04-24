@@ -10,7 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Infrastructure.Authentication.Jwt;
 
-internal static class ConfigureServices
+internal static class Dependencies
 {
     internal static IServiceCollection ConfigureJwt(
         this IServiceCollection services,

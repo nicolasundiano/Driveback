@@ -9,7 +9,7 @@ using Microsoft.Extensions.Options;
 
 namespace Infrastructure.Authentication;
 
-internal static class ConfigureServices
+internal static class Dependencies
 {
     internal static IServiceCollection ConfigureAuthentication(
         this IServiceCollection services,
