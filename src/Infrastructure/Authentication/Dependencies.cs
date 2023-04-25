@@ -1,4 +1,4 @@
-using Application.Users.Authentication.Common.Interfaces;
+using Application.Common.Interfaces.Authentication;
 using Infrastructure.Authentication.Common.Models;
 using Infrastructure.Authentication.Identity;
 using Infrastructure.Authentication.Jwt;

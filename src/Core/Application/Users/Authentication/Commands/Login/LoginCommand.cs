@@ -1,6 +1,6 @@
+using Application.Common.Interfaces.Authentication;
 using Application.Common.Interfaces.Persistence;
-using Application.Users.Authentication.Common.Interfaces;
-using Application.Users.Authentication.Common.Models;
+using Application.Common.Models;
 using Application.Users.Common.Errors;
 using Application.Users.Common.Specifications;
 using Domain.Users;

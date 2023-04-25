@@ -1,4 +1,4 @@
-namespace Application.Users.Authentication.Common.Interfaces;
+namespace Application.Common.Interfaces.Authentication;
 
 public interface IIdentityService
 {

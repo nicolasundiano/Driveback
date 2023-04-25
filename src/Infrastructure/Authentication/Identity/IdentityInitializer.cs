@@ -1,5 +1,5 @@
+using Application.Common.Interfaces.Authentication;
 using Application.Common.Interfaces.Persistence;
-using Application.Users.Authentication.Common.Interfaces;
 using Domain.Users;
 using Infrastructure.Authentication.Common.Models;
 using Infrastructure.Authentication.Identity.Initialization;
