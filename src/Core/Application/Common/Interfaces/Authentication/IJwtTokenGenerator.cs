@@ -1,5 +1,4 @@
 using Domain.Common;
-using Domain.Users;
 
 namespace Application.Common.Interfaces.Authentication;
 

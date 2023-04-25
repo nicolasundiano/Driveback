@@ -4,7 +4,6 @@ using System.Text;
 using Application.Common.Interfaces.Authentication;
 using Application.Common.Interfaces.Services;
 using Domain.Common;
-using Domain.Users;
 using Infrastructure.Authentication.Jwt.Models;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;

@@ -22,7 +22,7 @@ public class IdentityService : IIdentityService
         _roleManager = roleManager;
     }
     
-    public async Task<bool> RegisterAsync(Guid domainUserId, string email, string password)
+    public async Task<bool> RegisterAsync(Guid domainUserId, string email, string password, bool admin = false)
     {
         var identityUser = new ApplicationUser(domainUserId, email);
 
@@ -30,7 +30,7 @@ public class IdentityService : IIdentityService
         
         if (registerResult.Succeeded)
         {
-            var addToRoleResult = await _userManager.AddToRoleAsync(identityUser, UserRoles.Basic);
+            var addToRoleResult = await _userManager.AddToRoleAsync(identityUser, admin? UserRoles.Admin : UserRoles.Basic);
 
             if (addToRoleResult.Succeeded)
             {

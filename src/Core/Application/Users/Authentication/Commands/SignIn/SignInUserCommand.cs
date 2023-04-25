@@ -7,19 +7,19 @@ using Domain.Users;
 using ErrorOr;
 using MediatR;
 
-namespace Application.Users.Authentication.Commands.Login;
+namespace Application.Users.Authentication.Commands.SignIn;
 
-public record LoginCommand(
+public record SignInUserCommand(
     string Email,
     string Password) : IRequest<ErrorOr<AuthenticationResponse>>;
 
-public class LoginCommandHandler : IRequestHandler<LoginCommand, ErrorOr<AuthenticationResponse>>
+public class SignInUserCommandHandler : IRequestHandler<SignInUserCommand, ErrorOr<AuthenticationResponse>>
 {
     private readonly IRepository<User> _userRepository;
     private readonly IIdentityService _identityService;
     private readonly IJwtTokenGenerator _tokenGenerator;
 
-    public LoginCommandHandler(
+    public SignInUserCommandHandler(
         IRepository<User> userRepository,
         IIdentityService identityService,
         IJwtTokenGenerator tokenGenerator)
@@ -29,7 +29,7 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, ErrorOr<Authent
         _tokenGenerator = tokenGenerator;
     }
     public async Task<ErrorOr<AuthenticationResponse>> Handle(
-        LoginCommand command,
+        SignInUserCommand command,
         CancellationToken cancellationToken)
     {
         var user = await _userRepository.GetTrackedAsync(

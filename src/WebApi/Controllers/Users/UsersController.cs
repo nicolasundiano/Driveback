@@ -4,7 +4,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Controllers.Common;
 
-namespace WebApi.Controllers;
+namespace WebApi.Controllers.Users;
 
 [Route("[controller]/[action]")]
 public class UsersController : ApiController
