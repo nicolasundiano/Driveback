@@ -3,7 +3,7 @@ using Domain.Common.Validators;
 
 namespace Domain.Users;
 
-public class User : Entity<Guid>, IAggregateRoot
+public class User : Entity<Guid>, IUser, IAggregateRoot
 {
     public string Email { get; private set; }
     public string FirstName { get; private set; }

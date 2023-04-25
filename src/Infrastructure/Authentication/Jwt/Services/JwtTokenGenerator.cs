@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Text;
 using Application.Common.Interfaces.Authentication;
 using Application.Common.Interfaces.Services;
+using Domain.Common;
 using Domain.Users;
 using Infrastructure.Authentication.Jwt.Models;
 using Microsoft.Extensions.Options;
@@ -21,7 +22,7 @@ internal class JwtTokenGenerator : IJwtTokenGenerator
         _jwtSettings = jwtOptions.Value;
     }
 
-    public string GenerateToken(User user, IEnumerable<string> roles)
+    public string GenerateToken(IUser user, IEnumerable<string> roles)
     {
         var signingCredentials = new SigningCredentials(
             new SymmetricSecurityKey(
@@ -32,9 +33,6 @@ internal class JwtTokenGenerator : IJwtTokenGenerator
         {
             new(ClaimTypes.NameIdentifier, user.Id.ToString()),
             new(ClaimTypes.Email, user.Email),
-            new(ClaimTypes.Name, user.FirstName),
-            new(ClaimTypes.Surname, user.LastName),
-            new(ClaimTypes.MobilePhone, user.Phone),
         };
         
         claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
