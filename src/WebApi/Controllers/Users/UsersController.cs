@@ -1,4 +1,7 @@
+using Application.Users.Commands.AddChildUser;
+using Application.Users.Commands.UpdateUser;
 using Application.Users.Queries.GetAll;
+using Application.Users.Queries.GetUser;
 using Infrastructure.Authentication.Common.Attributes;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -14,6 +17,30 @@ public class UsersController : ApiController
     public UsersController(ISender mediator)
     {
         _mediator = mediator;
+    }
+    
+    [HttpGet]
+    public async Task<IActionResult> GetCurrentUser()
+    {
+        var getUserResult = await _mediator.Send(new GetUserQuery());
+
+        return getUserResult.Match(Ok, Problem);
+    }
+    
+    [HttpPut]
+    public async Task<IActionResult> UpdateCurrentUser(UpdateUserCommand command)
+    {
+        var updateUserResult = await _mediator.Send(command);
+
+        return updateUserResult.Match(Ok, Problem);
+    }
+    
+    [HttpPut]
+    public async Task<IActionResult> AddChildUser(AddChildUserCommand command)
+    {
+        var addChildUserResult = await _mediator.Send(command);
+
+        return addChildUserResult.Match(Ok, Problem);
     }
     
     [HttpGet]

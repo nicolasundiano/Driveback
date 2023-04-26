@@ -5,4 +5,5 @@ public record UserResponse(
     string Email,
     string FirstName,
     string LastName,
-    string Phone);
+    string Phone,
+    List<ChildUserResponse> ChildUsers);
