@@ -5,9 +5,14 @@ namespace Application.Users.Common.Specifications;
 
 public class UserSpecification : BaseSpecification<User>
 {
-    public UserSpecification(Guid id)
+    public UserSpecification(Guid id, bool includeChildUsers = false)
     {
         AddCriteria(u => u.Id == id);
+
+        if (includeChildUsers)
+        {
+            AddInclude(u => u.ChildUsers);
+        }
     }
 
     public UserSpecification(string email)
