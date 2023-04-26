@@ -1,7 +1,6 @@
 using Application.Common.Interfaces.Authentication;
 using Application.Common.Interfaces.Persistence;
 using Domain.Admins;
-using Domain.Users;
 using Infrastructure.Authentication.Common.Models;
 using Infrastructure.Authentication.Identity.Initialization;
 using Microsoft.Extensions.DependencyInjection;

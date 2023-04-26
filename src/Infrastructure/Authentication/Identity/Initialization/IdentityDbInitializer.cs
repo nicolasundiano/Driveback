@@ -1,9 +1,7 @@
 using Application.Admins.Common.Specifications;
 using Application.Common.Interfaces.Authentication;
 using Application.Common.Interfaces.Persistence;
-using Application.Users.Common.Specifications;
 using Domain.Admins;
-using Domain.Users;
 using Infrastructure.Authentication.Common.Constants;
 using Infrastructure.Authentication.Common.Models;
 

@@ -1,7 +1,5 @@
 using Application.Users.Authentication.Commands.Register;
 using Application.Users.Authentication.Commands.SignIn;
-using Application.Users.Current.Commands.UpdateCurrentUser;
-using Application.Users.Current.Queries.GetCurrentUser;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -35,21 +33,5 @@ public class AuthController : ApiController
         var signInResult = await _mediator.Send(command);
 
         return signInResult.Match(Ok, Problem);
-    }
-    
-    [HttpGet]
-    public async Task<IActionResult> GetCurrentUser()
-    {
-        var currentUserResult = await _mediator.Send(new GetCurrentUserQuery());
-
-        return currentUserResult.Match(Ok, Problem);
-    }
-    
-    [HttpPut]
-    public async Task<IActionResult> UpdateCurrentUser(UpdateCurrentUserCommand command)
-    {
-        var updateCurrentUserResult = await _mediator.Send(command);
-
-        return updateCurrentUserResult.Match(Ok, Problem);
     }
 }
