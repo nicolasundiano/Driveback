@@ -1,6 +1,8 @@
+using Application.Admins.Common.Specifications;
 using Application.Common.Interfaces.Authentication;
 using Application.Common.Interfaces.Persistence;
 using Application.Users.Common.Specifications;
+using Domain.Admins;
 using Domain.Users;
 using Infrastructure.Authentication.Common.Constants;
 using Infrastructure.Authentication.Common.Models;
@@ -21,16 +23,17 @@ public static class IdentityDbInitializer
     internal static async Task InitializeIdentityAdminUser(
         AdminUserSettings adminUserSettings,
         IIdentityService authenticationService,
-        IRepository<User> userRepository)
+        IReadRepository<Admin> adminRepository)
     {
         if (!await authenticationService.UsersAnyAsync())
         {
-            if (await userRepository.GetAsync(new UserSpecification(adminUserSettings.Email)) is { } user)
+            if (await adminRepository.GetAsync(new AdminSpecification(adminUserSettings.Email)) is { } admin)
             {
                 await authenticationService.RegisterAsync(
-                    user.Id,
+                    admin.Id,
                     adminUserSettings.Email,
-                    adminUserSettings.Password);
+                    adminUserSettings.Password,
+                    admin: true);
             }
         }
     }
