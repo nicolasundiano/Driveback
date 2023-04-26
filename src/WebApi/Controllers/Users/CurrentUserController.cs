@@ -6,7 +6,7 @@ using WebApi.Controllers.Common;
 
 namespace WebApi.Controllers.Users;
 
-[Microsoft.AspNetCore.Components.Route("[controller]/[action]")]
+[Route("[controller]/[action]")]
 public class CurrentUserController : ApiController
 {
     private readonly ISender _mediator;
