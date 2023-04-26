@@ -1,5 +1,6 @@
 using Application.Users.Current.Commands.UpdateCurrentUser;
 using Application.Users.Current.Queries.GetCurrentUser;
+using Infrastructure.Authentication.Common.Attributes;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Controllers.Common;
@@ -7,6 +8,7 @@ using WebApi.Controllers.Common;
 namespace WebApi.Controllers.Users;
 
 [Route("[controller]/[action]")]
+[MustHaveUserRole]
 public class CurrentUserController : ApiController
 {
     private readonly ISender _mediator;

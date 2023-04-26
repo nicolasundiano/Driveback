@@ -30,7 +30,7 @@ public class IdentityService : IIdentityService
         
         if (registerResult.Succeeded)
         {
-            var addToRoleResult = await _userManager.AddToRoleAsync(identityUser, admin? UserRoles.Admin : UserRoles.Basic);
+            var addToRoleResult = await _userManager.AddToRoleAsync(identityUser, admin? UserRoles.Admin : UserRoles.User);
 
             if (addToRoleResult.Succeeded)
             {

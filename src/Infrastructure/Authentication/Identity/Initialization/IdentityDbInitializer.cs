@@ -14,7 +14,7 @@ public static class IdentityDbInitializer
         if (!await authenticationService.RolesAnyAsync())
         {
             await authenticationService.CreateRoleAsync(UserRoles.Admin);
-            await authenticationService.CreateRoleAsync(UserRoles.Basic);
+            await authenticationService.CreateRoleAsync(UserRoles.User);
         }
     }
 
