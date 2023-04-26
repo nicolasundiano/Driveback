@@ -1,7 +1,5 @@
 using System.Reflection;
 using Application.Common.Behaviors;
-using Application.Users.Common.Interfaces;
-using Application.Users.Common.Services;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,8 +18,6 @@ public static class Dependencies
 
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-        services.AddScoped<IUserService, UserService>();
-        
         return services;
     }
 }

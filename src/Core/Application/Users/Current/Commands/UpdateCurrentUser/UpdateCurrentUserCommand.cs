@@ -1,5 +1,10 @@
-using Application.Users.Common.Interfaces;
+using Application.Common.Interfaces.Authentication;
+using Application.Common.Interfaces.Persistence;
+using Application.Users.Common.Errors;
 using Application.Users.Common.Models;
+using Application.Users.Common.Specifications;
+using AutoMapper;
+using Domain.Users;
 using ErrorOr;
 using MediatR;
 
@@ -12,20 +17,38 @@ public record UpdateCurrentUserCommand(
 
 public class UpdateCurrentUserCommandHandler : IRequestHandler<UpdateCurrentUserCommand, ErrorOr<UserResponse>>
 {
-    private readonly IUserService _userService;
+    private readonly ICurrentUserService _currentUserService;
+    private readonly IRepository<User> _repository;
+    private readonly IUnitOfWork _unitOfWork;
+    private readonly IMapper _mapper;
 
-    public UpdateCurrentUserCommandHandler(IUserService userService)
+    public UpdateCurrentUserCommandHandler(
+        ICurrentUserService currentUserService,
+        IRepository<User> repository,
+        IUnitOfWork unitOfWork,
+        IMapper mapper)
     {
-        _userService = userService;
+        _currentUserService = currentUserService;
+        _repository = repository;
+        _unitOfWork = unitOfWork;
+        _mapper = mapper;
     }
 
     public async Task<ErrorOr<UserResponse>> Handle(UpdateCurrentUserCommand command, CancellationToken cancellationToken)
     {
-        return await _userService.UpdateDetails(
-            command.FirstName,
-            command.LastName,
-            command.Phone,
-            default,
-            cancellationToken);
+        var userId = _currentUserService.UserId;
+        
+        var user = await _repository.GetTrackedAsync(new UserSpecification(userId), cancellationToken);
+
+        if (user is null)
+        {
+            return UserErrors.NotFound;
+        }
+        
+        user.UpdateDetails(command.FirstName, command.LastName, command.Phone);
+        
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
+        
+        return _mapper.Map<UserResponse>(user);
     }
 }

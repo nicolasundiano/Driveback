@@ -1,5 +1,10 @@
-using Application.Users.Common.Interfaces;
+using Application.Common.Interfaces.Authentication;
+using Application.Common.Interfaces.Persistence;
+using Application.Users.Common.Errors;
 using Application.Users.Common.Models;
+using Application.Users.Common.Specifications;
+using AutoMapper;
+using Domain.Users;
 using ErrorOr;
 using MediatR;
 
@@ -10,20 +15,33 @@ public record GetCurrentUserQuery : IRequest<ErrorOr<UserResponse>>;
 public class GetCurrentUserQueryHandler : 
     IRequestHandler<GetCurrentUserQuery, ErrorOr<UserResponse>>
 {
-    private readonly IUserService _userService;
-    
+    private readonly ICurrentUserService _currentUserService;
+    private readonly IReadRepository<User> _readRepository;
+    private readonly IMapper _mapper;
+
     public GetCurrentUserQueryHandler(
-        IUserService userService)
+        ICurrentUserService currentUserService,
+        IReadRepository<User> readRepository,
+        IMapper mapper)
     {
-        _userService = userService;
+        _currentUserService = currentUserService;
+        _readRepository = readRepository;
+        _mapper = mapper;
     }
     
     public async Task<ErrorOr<UserResponse>> Handle(
         GetCurrentUserQuery request,
         CancellationToken cancellationToken)
     {
-        return await _userService.GetUserResponse(
-            userId: default,
-            cancellationToken: cancellationToken);
+        var userId = _currentUserService.UserId;
+
+        var user = await _readRepository.GetAsync(new UserSpecification(userId), cancellationToken);
+
+        if (user is null)
+        {
+            return UserErrors.NotFound;
+        }
+
+        return _mapper.Map<UserResponse>(user);
     }
 }
