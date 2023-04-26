@@ -20,7 +20,7 @@ public static class Dependencies
 
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-        services.AddScoped<IGetUserService, GetUserService>();
+        services.AddScoped<IUserService, UserService>();
         
         return services;
     }
