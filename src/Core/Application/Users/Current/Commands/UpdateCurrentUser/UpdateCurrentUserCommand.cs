@@ -5,10 +5,10 @@ using Application.Users.Common.Models;
 using Application.Users.Common.Specifications;
 using AutoMapper;
 using Domain.Users;
-using MediatR;
 using ErrorOr;
+using MediatR;
 
-namespace Application.Users.Authentication.Commands.UpdateCurrentUser;
+namespace Application.Users.Current.Commands.UpdateCurrentUser;
 
 public record UpdateCurrentUserCommand(
     string? FirstName,

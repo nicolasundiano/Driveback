@@ -1,7 +1,7 @@
 using Application.Users.Authentication.Commands.Register;
 using Application.Users.Authentication.Commands.SignIn;
-using Application.Users.Authentication.Commands.UpdateCurrentUser;
-using Application.Users.Authentication.Queries.GetCurrentUser;
+using Application.Users.Current.Commands.UpdateCurrentUser;
+using Application.Users.Current.Queries.GetCurrentUser;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
