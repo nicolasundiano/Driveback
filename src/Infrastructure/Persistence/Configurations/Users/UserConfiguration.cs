@@ -25,5 +25,11 @@ internal class UserConfiguration : IEntityTypeConfiguration<User>
         
         builder.Property(u => u.Phone)
             .HasMaxLength(100);
+        
+        builder.HasMany(c => c.ChildUsers)
+            .WithOne()
+            .HasForeignKey("UserId")
+            .OnDelete(DeleteBehavior.Cascade)
+            .IsRequired();
     }
 }

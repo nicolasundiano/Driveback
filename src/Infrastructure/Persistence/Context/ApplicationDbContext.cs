@@ -22,5 +22,6 @@ public class ApplicationDbContext : DbContext
 
         builder.ApplyConfiguration(new UserConfiguration());
         builder.ApplyConfiguration(new AdminConfiguration());
+        builder.ApplyConfiguration(new ChildUserConfiguration());
     }
 }

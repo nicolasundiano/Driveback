@@ -1,14 +1,17 @@
 using Domain.Common;
 using Domain.Common.Validators;
+using Domain.Users.Entities;
 
 namespace Domain.Users;
 
 public class User : Entity<Guid>, IUser, IAggregateRoot
 {
+    private readonly List<ChildUser> _childUsers = new();
     public string Email { get; private set; }
     public string FirstName { get; private set; }
     public string LastName { get; private set; }
     public string Phone { get; private set; }
+    public IReadOnlyList<ChildUser> ChildUsers => _childUsers.AsReadOnly();
 
     private User(Guid id, string email, string firstName, string lastName, string phone)
         : base(id)
@@ -40,6 +43,13 @@ public class User : Entity<Guid>, IUser, IAggregateRoot
         {
             Phone = phone;
         }
+        
+        Validate();
+    }
+
+    public void AddChildUser(ChildUser childUser)
+    {
+        _childUsers.Add(childUser);
         
         Validate();
     }
