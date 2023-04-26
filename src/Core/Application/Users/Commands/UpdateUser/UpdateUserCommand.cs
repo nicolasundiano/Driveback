@@ -8,14 +8,14 @@ using Domain.Users;
 using ErrorOr;
 using MediatR;
 
-namespace Application.Users.Current.Commands.UpdateCurrentUser;
+namespace Application.Users.Commands.UpdateUser;
 
-public record UpdateCurrentUserCommand(
+public record UpdateUserCommand(
     string? FirstName,
     string? LastName,
     string? Phone) : IRequest<ErrorOr<UserResponse>>;
 
-public class UpdateCurrentUserCommandHandler : IRequestHandler<UpdateCurrentUserCommand, ErrorOr<UserResponse>>
+public class UpdateCurrentUserCommandHandler : IRequestHandler<UpdateUserCommand, ErrorOr<UserResponse>>
 {
     private readonly ICurrentUserService _currentUserService;
     private readonly IRepository<User> _repository;
@@ -34,7 +34,7 @@ public class UpdateCurrentUserCommandHandler : IRequestHandler<UpdateCurrentUser
         _mapper = mapper;
     }
 
-    public async Task<ErrorOr<UserResponse>> Handle(UpdateCurrentUserCommand command, CancellationToken cancellationToken)
+    public async Task<ErrorOr<UserResponse>> Handle(UpdateUserCommand command, CancellationToken cancellationToken)
     {
         var userId = _currentUserService.UserId;
         

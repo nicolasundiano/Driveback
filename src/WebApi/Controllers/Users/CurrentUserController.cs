@@ -1,5 +1,5 @@
-using Application.Users.Current.Commands.UpdateCurrentUser;
-using Application.Users.Current.Queries.GetCurrentUser;
+using Application.Users.Commands.UpdateUser;
+using Application.Users.Queries.GetUser;
 using Infrastructure.Authentication.Common.Attributes;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -21,13 +21,13 @@ public class CurrentUserController : ApiController
     [HttpGet]
     public async Task<IActionResult> GetCurrentUser()
     {
-        var currentUserResult = await _mediator.Send(new GetCurrentUserQuery());
+        var currentUserResult = await _mediator.Send(new GetUserQuery());
 
         return currentUserResult.Match(Ok, Problem);
     }
     
     [HttpPut]
-    public async Task<IActionResult> UpdateCurrentUser(UpdateCurrentUserCommand command)
+    public async Task<IActionResult> UpdateCurrentUser(UpdateUserCommand command)
     {
         var updateCurrentUserResult = await _mediator.Send(command);
 

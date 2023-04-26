@@ -8,12 +8,12 @@ using Domain.Users;
 using ErrorOr;
 using MediatR;
 
-namespace Application.Users.Current.Queries.GetCurrentUser;
+namespace Application.Users.Queries.GetUser;
 
-public record GetCurrentUserQuery : IRequest<ErrorOr<UserResponse>>;
+public record GetUserQuery : IRequest<ErrorOr<UserResponse>>;
 
 public class GetCurrentUserQueryHandler : 
-    IRequestHandler<GetCurrentUserQuery, ErrorOr<UserResponse>>
+    IRequestHandler<GetUserQuery, ErrorOr<UserResponse>>
 {
     private readonly ICurrentUserService _currentUserService;
     private readonly IReadRepository<User> _readRepository;
@@ -30,7 +30,7 @@ public class GetCurrentUserQueryHandler :
     }
     
     public async Task<ErrorOr<UserResponse>> Handle(
-        GetCurrentUserQuery request,
+        GetUserQuery request,
         CancellationToken cancellationToken)
     {
         var userId = _currentUserService.UserId;
