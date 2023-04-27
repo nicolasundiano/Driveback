@@ -21,10 +21,17 @@ public class ChildUser : Entity<Guid>
         return new ChildUser(Guid.NewGuid(), property1, property2);
     }
 
-    public void Update(string property1, int property2)
+    public void Update(string? property1, int? property2)
     {
-        Property1 = property1;
-        Property2 = property2;
+        if (!string.IsNullOrEmpty(property1))
+        {
+            Property1 = property1;
+        }
+
+        if (property2 is not null)
+        {
+            Property2 = (int)property2;
+        }
         
         Validate();
     }

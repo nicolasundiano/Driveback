@@ -54,6 +54,20 @@ public class User : Entity<Guid>, IUser, IAggregateRoot
         Validate();
     }
 
+    public ChildUser? GetChildUser(Guid childUserId)
+    {
+        return ChildUsers.FirstOrDefault(cu => cu.Id == childUserId);
+    }
+
+    public void UpdateChildUser(Guid childUserId, string? property1, int? property2)
+    {
+        var childUser = GetChildUser(childUserId);
+
+        childUser?.Update(property1, property2);
+        
+        Validate();
+    }
+
     private void Validate()
     {
         ValidationHelper.ValidateEmail(Email, nameof(Email));

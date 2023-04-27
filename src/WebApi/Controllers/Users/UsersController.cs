@@ -1,4 +1,5 @@
-using Application.Users.Commands.AddChildUser;
+using Application.Users.ChildUsers.Commands.AddChildUser;
+using Application.Users.ChildUsers.Commands.UpdateChildUser;
 using Application.Users.Commands.UpdateUser;
 using Application.Users.Queries.GetAll;
 using Application.Users.Queries.GetUser;
@@ -41,6 +42,14 @@ public class UsersController : ApiController
         var addChildUserResult = await _mediator.Send(command);
 
         return addChildUserResult.Match(Ok, Problem);
+    }
+    
+    [HttpPut]
+    public async Task<IActionResult> UpdateChildUser(UpdateChildUserCommand command)
+    {
+        var updateChildUserResult = await _mediator.Send(command);
+
+        return updateChildUserResult.Match(Ok, Problem);
     }
     
     [HttpGet]

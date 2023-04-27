@@ -5,24 +5,24 @@ using Application.Users.Common.Models;
 using Application.Users.Common.Specifications;
 using AutoMapper;
 using Domain.Users;
-using Domain.Users.Entities;
 using MediatR;
 using ErrorOr;
 
-namespace Application.Users.Commands.AddChildUser;
+namespace Application.Users.ChildUsers.Commands.UpdateChildUser;
 
-public record AddChildUserCommand(
-    string Property1,
-    int Property2) : IRequest<ErrorOr<UserResponse>>;
+public record UpdateChildUserCommand(
+    Guid ChildUserId,
+    string? Property1,
+    int? Property2) : IRequest<ErrorOr<UserResponse>>;
 
-public class AddChildUserCommandHandler : IRequestHandler<AddChildUserCommand, ErrorOr<UserResponse>>
+public class UpdateChildUserCommandHandler : IRequestHandler<UpdateChildUserCommand, ErrorOr<UserResponse>>
 {
     private readonly ICurrentUserService _currentUserService;
     private readonly IRepository<User> _userRepository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
 
-    public AddChildUserCommandHandler(
+    public UpdateChildUserCommandHandler(
         ICurrentUserService currentUserService,
         IRepository<User> userRepository,
         IUnitOfWork unitOfWork,
@@ -34,7 +34,7 @@ public class AddChildUserCommandHandler : IRequestHandler<AddChildUserCommand, E
         _mapper = mapper;
     }
     
-    public async Task<ErrorOr<UserResponse>> Handle(AddChildUserCommand command, CancellationToken cancellationToken)
+    public async Task<ErrorOr<UserResponse>> Handle(UpdateChildUserCommand command, CancellationToken cancellationToken)
     {
         var userId = _currentUserService.UserId;
         
@@ -44,11 +44,16 @@ public class AddChildUserCommandHandler : IRequestHandler<AddChildUserCommand, E
         {
             return UserErrors.NotFound;
         }
+
+        if (trackedUser.GetChildUser(command.ChildUserId) is null)
+        {
+            return ChildUserErrors.NotFound;
+        }
         
-        trackedUser.AddChildUser(ChildUser.Create(command.Property1, command.Property2));
-        
+        trackedUser.UpdateChildUser(command.ChildUserId, command.Property1, command.Property2);
+
         await _unitOfWork.SaveChangesAsync(cancellationToken);
-        
+
         return _mapper.Map<UserResponse>(trackedUser);
     }
 }
