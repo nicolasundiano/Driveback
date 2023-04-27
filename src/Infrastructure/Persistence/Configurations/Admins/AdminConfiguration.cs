@@ -11,6 +11,9 @@ public class AdminConfiguration : IEntityTypeConfiguration<Admin>
         builder.ToTable("Admins");
         
         builder.HasKey(a => a.Id);
+        
+        builder.Property(a => a.Id)
+            .ValueGeneratedNever();
 
         builder.HasIndex(a => a.Email).IsUnique();
         

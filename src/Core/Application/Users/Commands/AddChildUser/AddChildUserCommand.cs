@@ -38,17 +38,17 @@ public class AddChildUserCommandHandler : IRequestHandler<AddChildUserCommand, E
     {
         var userId = _currentUserService.UserId;
         
-        var user = await _userRepository.GetTrackedAsync(new UserSpecification(userId), cancellationToken);
+        var trackedUser = await _userRepository.GetTrackedAsync(new UserSpecification(userId, true), cancellationToken);
 
-        if (user is null)
+        if (trackedUser is null)
         {
             return UserErrors.NotFound;
         }
         
-        user.AddChildUser(ChildUser.Create(command.Property1, command.Property2));
+        trackedUser.AddChildUser(ChildUser.Create(command.Property1, command.Property2));
         
         await _unitOfWork.SaveChangesAsync(cancellationToken);
         
-        return _mapper.Map<UserResponse>(user);
+        return _mapper.Map<UserResponse>(trackedUser);
     }
 }

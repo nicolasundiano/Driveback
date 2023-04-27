@@ -35,7 +35,7 @@ public class GetCurrentUserQueryHandler :
     {
         var userId = _currentUserService.UserId;
 
-        var user = await _readRepository.GetAsync(new UserSpecification(userId), cancellationToken);
+        var user = await _readRepository.GetAsync(new UserSpecification(userId, true), cancellationToken);
 
         if (user is null)
         {

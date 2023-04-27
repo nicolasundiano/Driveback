@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230425231628_Admin")]
-    partial class Admin
+    [Migration("20230427004411_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,7 +28,6 @@ namespace Infrastructure.Persistence.Migrations
             modelBuilder.Entity("Domain.Admins.Admin", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Email")
@@ -44,10 +43,32 @@ namespace Infrastructure.Persistence.Migrations
                     b.ToTable("Admins", (string)null);
                 });
 
+            modelBuilder.Entity("Domain.Users.Entities.ChildUser", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Property1")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("Property2")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ChildUsers", (string)null);
+                });
+
             modelBuilder.Entity("Domain.Users.User", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Email")
@@ -76,6 +97,20 @@ namespace Infrastructure.Persistence.Migrations
                         .IsUnique();
 
                     b.ToTable("Users", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.Users.Entities.ChildUser", b =>
+                {
+                    b.HasOne("Domain.Users.User", null)
+                        .WithMany("ChildUsers")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.Users.User", b =>
+                {
+                    b.Navigation("ChildUsers");
                 });
 #pragma warning restore 612, 618
         }

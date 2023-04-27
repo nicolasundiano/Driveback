@@ -25,7 +25,6 @@ namespace Infrastructure.Persistence.Migrations
             modelBuilder.Entity("Domain.Admins.Admin", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Email")
@@ -44,7 +43,6 @@ namespace Infrastructure.Persistence.Migrations
             modelBuilder.Entity("Domain.Users.Entities.ChildUser", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Property1")
@@ -68,7 +66,6 @@ namespace Infrastructure.Persistence.Migrations
             modelBuilder.Entity("Domain.Users.User", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Email")

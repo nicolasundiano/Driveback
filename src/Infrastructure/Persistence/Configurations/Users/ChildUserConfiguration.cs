@@ -12,7 +12,10 @@ public class ChildUserConfiguration : IEntityTypeConfiguration<ChildUser>
 
         builder.HasKey(cu => cu.Id);
         
-        builder.Property(c => c.Property1)
+        builder.Property(cu => cu.Id)
+            .ValueGeneratedNever();
+        
+        builder.Property(cu => cu.Property1)
             .HasMaxLength(100);
     }
 }

@@ -38,17 +38,17 @@ public class UpdateCurrentUserCommandHandler : IRequestHandler<UpdateUserCommand
     {
         var userId = _currentUserService.UserId;
         
-        var user = await _repository.GetTrackedAsync(new UserSpecification(userId), cancellationToken);
+        var trackedUser = await _repository.GetTrackedAsync(new UserSpecification(userId, true), cancellationToken);
 
-        if (user is null)
+        if (trackedUser is null)
         {
             return UserErrors.NotFound;
         }
         
-        user.UpdateDetails(command.FirstName, command.LastName, command.Phone);
+        trackedUser.UpdateDetails(command.FirstName, command.LastName, command.Phone);
         
         await _unitOfWork.SaveChangesAsync(cancellationToken);
         
-        return _mapper.Map<UserResponse>(user);
+        return _mapper.Map<UserResponse>(trackedUser);
     }
 }
