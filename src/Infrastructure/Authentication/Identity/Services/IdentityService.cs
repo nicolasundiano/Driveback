@@ -9,16 +9,13 @@ namespace Infrastructure.Authentication.Identity.Services;
 public class IdentityService : IIdentityService
 {
     private readonly UserManager<ApplicationUser> _userManager;
-    private readonly SignInManager<ApplicationUser> _signInManager;
     private readonly RoleManager<IdentityRole> _roleManager;
 
     public IdentityService(
         UserManager<ApplicationUser> userManager,
-        SignInManager<ApplicationUser> signInManager,
         RoleManager<IdentityRole> roleManager)
     {
         _userManager = userManager;
-        _signInManager = signInManager;
         _roleManager = roleManager;
     }
     
@@ -43,13 +40,6 @@ public class IdentityService : IIdentityService
         return false;
     }
 
-    public async Task<bool> LoginAsync(string email, string password)
-    {
-        var loginResult = await _signInManager.PasswordSignInAsync(email, password, false, true);
-
-        return loginResult.Succeeded;
-    }
-    
     public async Task<bool> UsersAnyAsync()
     {
         return await _userManager.Users.AnyAsync();

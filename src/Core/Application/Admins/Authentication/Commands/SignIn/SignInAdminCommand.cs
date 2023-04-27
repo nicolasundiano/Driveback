@@ -16,16 +16,16 @@ public record SignInAdminCommand(
 public class SignInAdminCommandHandler : IRequestHandler<SignInAdminCommand, ErrorOr<AuthenticationResponse>>
 {
     private readonly IRepository<Admin> _adminRepository;
-    private readonly IIdentityService _identityService;
+    private readonly ISignInService _signInService;
     private readonly IJwtTokenGenerator _tokenGenerator;
 
     public SignInAdminCommandHandler(
         IRepository<Admin> adminRepository,
-        IIdentityService identityService,
+        ISignInService signInService,
         IJwtTokenGenerator tokenGenerator)
     {
         _adminRepository = adminRepository;
-        _identityService = identityService;
+        _signInService = signInService;
         _tokenGenerator = tokenGenerator;
     }
     
@@ -35,16 +35,14 @@ public class SignInAdminCommandHandler : IRequestHandler<SignInAdminCommand, Err
             new AdminSpecification(command.Email),
             cancellationToken);
 
-        var loginSucceed = await _identityService.LoginAsync(command.Email, command.Password);
+        var loginSucceed = await _signInService.SignInAsync(command.Email, command.Password);
         
         if (admin is null || !loginSucceed)
         {
             return AdminErrors.InvalidCredentials;
         }
 
-        var roles = await _identityService.GetRolesByUserAsync(admin.Email);
-
-        var token = _tokenGenerator.GenerateToken(admin, roles);
+        var token = await _tokenGenerator.GenerateToken(admin);
 
         return new AuthenticationResponse(token);
     }

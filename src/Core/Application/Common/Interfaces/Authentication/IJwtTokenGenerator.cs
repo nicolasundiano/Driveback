@@ -4,5 +4,5 @@ namespace Application.Common.Interfaces.Authentication;
 
 public interface IJwtTokenGenerator
 {
-    string GenerateToken(IUser user, IEnumerable<string> roles);
+    Task<string> GenerateToken(IUser user);
 }

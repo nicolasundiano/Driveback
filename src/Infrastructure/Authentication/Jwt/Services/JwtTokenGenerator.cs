@@ -14,14 +14,19 @@ internal class JwtTokenGenerator : IJwtTokenGenerator
 {
     private readonly JwtSettings _jwtSettings;
     private readonly IDateTimeProvider _dateTimeProvider;
+    private readonly IIdentityService _identityService;
 
-    public JwtTokenGenerator(IDateTimeProvider dateTimeProvider, IOptions<JwtSettings> jwtOptions)
+    public JwtTokenGenerator(
+        IDateTimeProvider dateTimeProvider,
+        IOptions<JwtSettings> jwtOptions,
+        IIdentityService identityService)
     {
         _dateTimeProvider = dateTimeProvider;
+        _identityService = identityService;
         _jwtSettings = jwtOptions.Value;
     }
 
-    public string GenerateToken(IUser user, IEnumerable<string> roles)
+    public async Task<string> GenerateToken(IUser user)
     {
         var signingCredentials = new SigningCredentials(
             new SymmetricSecurityKey(
@@ -33,6 +38,8 @@ internal class JwtTokenGenerator : IJwtTokenGenerator
             new(ClaimTypes.NameIdentifier, user.Id.ToString()),
             new(ClaimTypes.Email, user.Email),
         };
+        
+        var roles = await _identityService.GetRolesByUserAsync(user.Email);
         
         claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
 

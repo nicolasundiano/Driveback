@@ -21,7 +21,7 @@ internal static class Dependencies
 
         services.AddSingleton(Options.Create(jwtSettings));
 
-        services.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();
+        services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
 
         services.AddAuthentication(options =>
             {

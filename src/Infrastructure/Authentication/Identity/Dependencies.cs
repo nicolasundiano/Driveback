@@ -19,6 +19,7 @@ internal static class Dependencies
             c.UseSqlServer(configuration.GetConnectionString("IdentityConnection")));
         
         services.AddScoped<IIdentityService, IdentityService>();
+        services.AddScoped<ISignInService, SignInService>();
         
         services.AddIdentity<ApplicationUser, IdentityRole>()
             .AddEntityFrameworkStores<IdentityAuthDbContext>()
