@@ -1,6 +1,6 @@
 namespace Domain.Common.Validators;
 
-public static partial class ValidationHelper
+public static partial class Throw
 {
     public static void ValidateUniqueListProperty<TValue, TKey>(
         IEnumerable<TValue> list,

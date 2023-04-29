@@ -49,6 +49,12 @@ public class UpdateChildUserCommandHandler : IRequestHandler<UpdateChildUserComm
         {
             return ChildUserErrors.NotFound;
         }
+
+        if (command.Property2.HasValue && 
+            trackedUser.ChildUserProperty2Exists(command.ChildUserId, command.Property2.Value))
+        {
+            return UserErrors.ChildUserProperty2Duplicated;
+        }
         
         trackedUser.UpdateChildUser(command.ChildUserId, command.Property1, command.Property2);
 

@@ -1,6 +1,6 @@
 namespace Domain.Common.Validators;
 
-public partial class ValidationHelper
+public partial class Throw
 {
     public static void ValidateOutOfRange(
         int input,

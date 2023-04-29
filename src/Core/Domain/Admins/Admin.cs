@@ -21,6 +21,6 @@ public class Admin : Entity<Guid>, IUser, IAggregateRoot
 
     private void Validate()
     {
-        ValidationHelper.ValidateEmail(Email, nameof(Email));
+        Throw.ValidateEmail(Email, nameof(Email));
     }
 }

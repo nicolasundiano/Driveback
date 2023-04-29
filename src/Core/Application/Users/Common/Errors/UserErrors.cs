@@ -19,4 +19,8 @@ public static class UserErrors
     public static Error InvalidCredentials => Error.Validation(
         code: "User.InvalidCred",
         description: "User invalid credentials.");
+    
+    public static Error ChildUserProperty2Duplicated => Error.Conflict(
+        code: "User.ChildUserProperty2Duplicated",
+        description: "User ChildUserProperty2Duplicated.");
 }

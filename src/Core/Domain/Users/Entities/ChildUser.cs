@@ -38,8 +38,8 @@ public class ChildUser : Entity<Guid>
 
     private void Validate()
     {
-        ValidationHelper.ValidateString(Property1, nameof(Property1), 100);
-        ValidationHelper.ValidateOutOfRange(Property2, nameof(Property2), 1, 500);
+        Throw.ValidateString(Property1, nameof(Property1), 100);
+        Throw.ValidateOutOfRange(Property2, nameof(Property2), 1, 500);
     }
     
 #pragma warning disable CS8618

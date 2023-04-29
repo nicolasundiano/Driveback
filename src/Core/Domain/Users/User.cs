@@ -56,7 +56,7 @@ public class User : Entity<Guid>, IUser, IAggregateRoot
 
     public ChildUser? GetChildUser(Guid childUserId)
     {
-        return ChildUsers.FirstOrDefault(cu => cu.Id == childUserId);
+        return ChildUsers.SingleOrDefault(cu => cu.Id == childUserId);
     }
 
     public void UpdateChildUser(Guid childUserId, string? property1, int? property2)
@@ -68,12 +68,22 @@ public class User : Entity<Guid>, IUser, IAggregateRoot
         Validate();
     }
 
+    public bool ChildUserProperty2Exists(Guid childUserId, int property2)
+    {
+        return ChildUsers.Any(cu => cu.Property2 == property2 && cu.Id != childUserId);
+    }
+
     private void Validate()
     {
-        ValidationHelper.ValidateEmail(Email, nameof(Email));
-        ValidationHelper.ValidateString(FirstName, nameof(FirstName), 100);
-        ValidationHelper.ValidateString(LastName, nameof(LastName), 100);
-        ValidationHelper.ValidateString(Phone, nameof(Phone), 100);
+        Throw.ValidateEmail(Email, nameof(Email));
+        Throw.ValidateString(FirstName, nameof(FirstName), 100);
+        Throw.ValidateString(LastName, nameof(LastName), 100);
+        Throw.ValidateString(Phone, nameof(Phone), 100);
+        Throw.ValidateUniqueListProperty(
+            ChildUsers,
+            nameof(ChildUsers),
+            cu => cu.Property2,
+            nameof(ChildUser.Property2));
     }
 
 #pragma warning disable CS8618

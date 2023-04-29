@@ -2,7 +2,7 @@ using System.Text.RegularExpressions;
 
 namespace Domain.Common.Validators;
 
-public static partial class ValidationHelper
+public static partial class Throw
 {
     public static void ValidateEmail(
         string email,
